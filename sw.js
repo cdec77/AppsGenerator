@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "appsgenerator:" + self.registration.scope + ":";
-const CACHE = CACHE_PREFIX + "v1";
+const CACHE = CACHE_PREFIX + "v2";
 const SHELL = [
   "./", "./style.css", "./app.js", "./storage.js", "./manifest.webmanifest",
   "./icone.ico", "./Import_csv_modele.csv", "./appreciations.db",
@@ -9,7 +9,11 @@ const SHELL = [
 ];
 
 self.addEventListener("install", event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    await cache.addAll(SHELL.map(url => new Request(url, { cache: "reload" })));
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener("activate", event => {

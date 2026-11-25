@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#262046">
+  <meta name="theme-color" content="#100921">
   <meta name="description" content="Générateur d’appréciations scolaires individuelles.">
   <title>AppsGenerator · Atelier d’appréciations</title>
   <link rel="icon" href="icone.ico">
@@ -33,7 +33,11 @@
       <form class="card" id="student-form">
         <h2>Appréciation individuelle</h2>
         <label for="name">Prénom</label>
-        <input id="name" name="prenom" placeholder="Ex. Camille" autocomplete="off" maxlength="100" required>
+        <div class="name-input">
+          <input id="name" name="prenom" placeholder="Ex. Camille" autocomplete="off" maxlength="100" required>
+          <button id="dictate-name" class="quiet" type="button" aria-describedby="name-voice-info">🎙 Dicter le prénom</button>
+        </div>
+        <p id="name-voice-info" class="voice-info" role="status">La dictée utilise le service vocal de l’appareil ou du navigateur.</p>
         <fieldset>
           <legend>Genre grammatical</legend>
           <div class="radios">
@@ -71,9 +75,18 @@
           <div id="profiles" class="choices"></div>
         </section>
         <section class="card writing">
-          <label for="preview">Suggestion</label>
-          <textarea id="preview" rows="4" readonly placeholder="Choisissez un profil pour tirer une phrase."></textarea>
-          <button id="add" class="primary" type="button" disabled>Ajouter</button>
+          <h3 id="suggestions-title">Suggestions</h3>
+          <p id="suggestion-hint">Choisissez un profil pour voir les propositions.</p>
+          <ul id="suggestions" class="suggestions" aria-labelledby="suggestions-title"></ul>
+          <form id="custom-form" class="custom-form">
+            <label for="custom-phrase">Appréciation personnalisée</label>
+            <textarea id="custom-phrase" rows="2" placeholder="Saisissez ou dictez votre appréciation."></textarea>
+            <div class="custom-actions">
+              <button id="dictate-phrase" class="quiet" type="button" aria-describedby="phrase-voice-info">🎙 Dicter une phrase</button>
+              <button id="add-custom" class="primary" type="submit" disabled>Ajouter ma phrase</button>
+            </div>
+            <p id="phrase-voice-info" class="voice-info" role="status">La dictée utilise le service vocal de l’appareil ou du navigateur.</p>
+          </form>
           <label for="draft">Appréciation finale</label>
           <textarea id="draft" rows="8" placeholder="Vous pouvez modifier votre texte ici."></textarea>
           <button id="copy" class="quiet" type="button" disabled>Copier le texte</button>
@@ -82,5 +95,6 @@
     </section>
     <p id="status" role="status" aria-live="polite"></p>
   </main>
+  <footer class="site-footer">© Cyrille de Chanteloup 2026</footer>
 </body>
 </html>
