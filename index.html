@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#262046">
+  <meta name="description" content="Générateur d’appréciations scolaires individuelles.">
+  <title>AppsGenerator · Atelier d’appréciations</title>
+  <link rel="icon" href="icone.ico">
+  <link rel="apple-touch-icon" sizes="152x152" href="icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <script src="sql-wasm.js" defer></script>
+  <script src="papaparse.min.js" defer></script>
+  <script src="storage.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="brand-icon"><img src="icone.ico" alt="" width="30" height="30"></span> AppsGenerator</div>
+    <button id="install" class="quiet" type="button" hidden>Installer l’app</button>
+  </header>
+  <main>
+    <section class="intro">
+      <h1>Atelier<br>d’appréciations<span>.</span></h1>
+      <p>Choisissez une catégorie et un profil, puis assemblez votre appréciation.</p>
+      <div class="motif" aria-hidden="true"><span>✳</span><span>“</span><span>✦</span></div>
+    </section>
+
+    <section id="home" class="home-grid" aria-label="Accueil">
+      <form class="card" id="student-form">
+        <h2>Appréciation individuelle</h2>
+        <label for="name">Prénom</label>
+        <input id="name" name="prenom" placeholder="Ex. Camille" autocomplete="off" maxlength="100" required>
+        <fieldset>
+          <legend>Genre grammatical</legend>
+          <div class="radios">
+            <label><input type="radio" name="genre" value="masculin" checked> Masculin</label>
+            <label><input type="radio" name="genre" value="féminin"> Féminin</label>
+          </div>
+        </fieldset>
+        <button class="primary" type="submit">Commencer</button>
+      </form>
+      <section class="card bank" aria-labelledby="bank-title">
+        <span class="bank-icon" aria-hidden="true">✎</span>
+        <h2>Banque de phrases</h2>
+        <p>Enrichissez les suggestions de l’atelier avec vos propres formulations.</p>
+        <div class="bank-actions">
+          <input id="csv" type="file" accept=".csv,text/csv" hidden>
+          <button id="import" class="quiet" type="button">Importer un CSV</button>
+          <a href="Import_csv_modele.csv" download>Modèle CSV</a>
+          <input id="sqlite-file" type="file" accept=".db,.sqlite,.sqlite3" hidden>
+          <button id="export-db" class="quiet" type="button">Exporter la base .db</button>
+          <button id="merge-db" class="quiet" type="button">Importer une base .db</button>
+        </div>
+      </section>
+    </section>
+
+    <section id="editor" hidden aria-label="Composition">
+      <div class="toolbar"><h2 id="student" tabindex="-1"></h2><button id="reset" class="quiet" type="button">Réinitialiser</button></div>
+      <div class="editor-grid">
+        <section class="card">
+          <h3>Catégorie</h3>
+          <div id="categories" class="choices"></div>
+        </section>
+        <section class="card">
+          <h3>Profil</h3>
+          <p id="choose-category">Choisissez une catégorie.</p>
+          <div id="profiles" class="choices"></div>
+        </section>
+        <section class="card writing">
+          <label for="preview">Suggestion</label>
+          <textarea id="preview" rows="4" readonly placeholder="Choisissez un profil pour tirer une phrase."></textarea>
+          <button id="add" class="primary" type="button" disabled>Ajouter</button>
+          <label for="draft">Appréciation finale</label>
+          <textarea id="draft" rows="8" placeholder="Vous pouvez modifier votre texte ici."></textarea>
+          <button id="copy" class="quiet" type="button" disabled>Copier le texte</button>
+        </section>
+      </div>
+    </section>
+    <p id="status" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>
