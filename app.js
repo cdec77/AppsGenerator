@@ -325,6 +325,7 @@ let category = "";
 let offered = [];
 let selectedProfile = "";
 const batches = new Map();
+const seenProposals = new Map();
 
 function status(message, error = false) {
   byId("status").textContent = message;
@@ -561,7 +562,7 @@ function sentenceList(text) {
 
 function sentenceKey(sentence) {
   const subject = new RegExp(`^(?:${namePattern()}|il|elle)\\s+`, "iu");
-  return sentence.replace(subject, "")
+  return sentence.replace(/^Au cours de la période, /iu, "").replace(subject, "")
     .replace(/^(?:(?:devra|pourra) |(?:convient|sera utile|est recommandé|importe) d(?:e |’))/iu, "")
     .replace(/[.!?…]+$/u, "").trim().toLocaleLowerCase("fr");
 }
@@ -609,20 +610,52 @@ function appendPhrase(phrase, index) {
   status("Phrase ajoutée à l’appréciation.");
 }
 
+function collegeSuggestions(pool, key, previous) {
+  let seen = seenProposals.get(key);
+  if (!seen || pool.length - seen.size < 4) {
+    seen = new Set(previous);
+    seenProposals.set(key, seen);
+  }
+  const candidates = pool.filter(phrase => !seen.has(phrase));
+  for (let index = candidates.length - 1; index > 0; index--) {
+    const random = Math.floor(Math.random() * (index + 1));
+    [candidates[index], candidates[random]] = [candidates[random], candidates[index]];
+  }
+  const result = [];
+  const used = new Set();
+  for (const phrase of candidates) {
+    const fresh = unusedSentences(phrase);
+    const keys = sentenceList(fresh).map(sentenceKey);
+    if (!keys.length || keys.some(item => used.has(item))) continue;
+    keys.forEach(item => used.add(item));
+    result.push(phrase);
+    if (result.length === 4) break;
+  }
+  for (const phrase of candidates) {
+    if (result.length === 4) break;
+    if (!result.includes(phrase)) result.push(phrase);
+  }
+  result.forEach(phrase => seen.add(phrase));
+  return result;
+}
+
 function generate(profile, refresh = false) {
   selectedProfile = profile;
   const profileIndex = profiles.findIndex(([value]) => value === profile);
   const key = category + "/" + profile;
   const batch = refresh ? (batches.get(key) ?? 0) + 1 : (batches.get(key) ?? 0);
   batches.set(key, batch);
-  offered = editorialPhrases(profileIndex, batch);
-  const custom = [...new Set(bank?.[category]?.[profile]?.[student.genre] ?? [])].filter(phrase =>
-    /^\{prenom\} /u.test(phrase) && !directAddress.test(phrase) && sentenceList(phrase).length === 1 &&
-    phrase.trim().split(/\s+/u).length <= 16
+  const pool = bank?.college?.[category]?.[profile]?.[student.genre] ?? [];
+  offered = pool.length >= 8
+    ? collegeSuggestions(pool, key, offered)
+    : editorialPhrases(profileIndex, batch);
+  const personal = [...new Set(bank?.personal?.[category]?.[profile]?.[student.genre] ?? [])].filter(phrase =>
+    /^\{prenom\} /u.test(phrase) && !directAddress.test(phrase) &&
+    sentenceList(phrase).length === 1 && phrase.trim().split(/\s+/u).length <= 16
   );
-  if (custom.length && batch % 4 === 0) {
+  if (personal.length && batch % 4 === 0) {
     const [, step] = sentenceList(offered[3]);
-    offered[3] = custom[Math.floor(batch / 4) % custom.length].replace(/[.!?…]*$/u, ".") + " " + step;
+    offered[3] = personal[Math.floor(batch / 4) % personal.length].replace(/[.!?…]*$/u, ".") + " " + step;
   }
   renderSuggestions();
   byId("suggestion-hint").hidden = true;
@@ -685,6 +718,7 @@ byId("reset").addEventListener("click", () => {
   student = null;
   category = "";
   batches.clear();
+  seenProposals.clear();
   form.reset();
   principalForm.reset();
   principalDraft.value = "";

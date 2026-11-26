@@ -81,19 +81,54 @@ async function dbRows(file) {
 }
 
 function makeBank(db) {
-  const result = {};
-  const rows = db.exec("SELECT categorie, profil, genre, texte FROM appreciations")[0]?.values ?? [];
-  for (const [category, profile, genre, phrase] of rows) {
-    ((result[category] ??= {})[profile] ??= {})[genre] ??= [];
-    result[category][profile][genre].push(phrase);
+  const result = { college: {}, personal: {} };
+  const rows = db.exec("SELECT categorie, profil, genre, texte, source FROM appreciations WHERE source IS NOT NULL")[0]?.values ?? [];
+  for (const [category, profile, genre, phrase, source] of rows) {
+    const bank = result[source];
+    if (!bank) continue;
+    const profiles = bank[category] ??= {};
+    const genres = profiles[profile] ??= {};
+    (genres[genre] ??= []).push(phrase);
   }
   return result;
+}
+
+function upgradeCollegeBank(db, SQL, initial) {
+  const seed = new SQL.Database(new Uint8Array(initial));
+  try {
+    const seedVersion = seed.exec("PRAGMA user_version")[0].values[0][0];
+    if (seedVersion < 1 || db.exec("PRAGMA user_version")[0].values[0][0] >= seedVersion) return false;
+    const rows = seed.exec(
+      "SELECT categorie, profil, genre, texte FROM appreciations WHERE source = 'college'"
+    )[0].values;
+    db.run("BEGIN");
+    db.run("ALTER TABLE appreciations ADD COLUMN source TEXT");
+    db.run("UPDATE appreciations SET source = 'personal' WHERE id > 2000");
+    const existing = new Set(
+      (db.exec("SELECT categorie, profil, genre, texte FROM appreciations")[0]?.values ?? []).map(row => JSON.stringify(row))
+    );
+    const insert = db.prepare(
+      "INSERT INTO appreciations(categorie, profil, genre, texte, source) VALUES (?, ?, ?, ?, 'college')"
+    );
+    try {
+      for (const row of rows) {
+        if (!existing.has(JSON.stringify(row))) insert.run(row);
+      }
+    } finally {
+      insert.free();
+    }
+    db.run("PRAGMA user_version = 1");
+    db.run("COMMIT");
+    return true;
+  } finally {
+    seed.close();
+  }
 }
 
 async function database(action, write = false) {
   const [SQL, initial, store] = await Promise.all([sqlite, seedDatabase, persistentStore]);
   return new Promise((resolve, reject) => {
-    const transaction = store.transaction("files", write ? "readwrite" : "readonly");
+    const transaction = store.transaction("files", "readwrite");
     const files = transaction.objectStore("files");
     const request = files.get("appreciations.db");
     let result;
@@ -102,8 +137,10 @@ async function database(action, write = false) {
       let db;
       try {
         db = new SQL.Database(new Uint8Array(request.result ?? initial));
+        const needsMigration = request.result && db.exec("PRAGMA user_version")[0].values[0][0] < 1;
+        const upgraded = needsMigration && upgradeCollegeBank(db, SQL, initial);
         result = action(db);
-        if (write) files.put(db.export(), "appreciations.db");
+        if (write || upgraded) files.put(db.export(), "appreciations.db");
       } catch (error) {
         failure = error;
         transaction.abort();
@@ -118,7 +155,7 @@ async function database(action, write = false) {
 
 function saveRows(rows, excludeDuplicates) {
   return database(db => {
-    const insert = db.prepare("INSERT INTO appreciations(categorie, profil, genre, texte) VALUES (?, ?, ?, ?)");
+    const insert = db.prepare("INSERT INTO appreciations(categorie, profil, genre, texte, source) VALUES (?, ?, ?, ?, 'personal')");
     const existing = excludeDuplicates ? new Set(
       (db.exec("SELECT categorie, profil, genre, texte FROM appreciations")[0]?.values ?? []).map(row => JSON.stringify(row))
     ) : null;
