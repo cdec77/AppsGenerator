@@ -127,7 +127,7 @@ const nextSteps = {
   ],
   Conseils: [
     ["s’entraîner à transférer les méthodes vers des tâches nouvelles", "approfondir les connaissances en confrontant plusieurs démarches", "continuer à réviser et à justifier les choix de méthode", "poursuivre les efforts tout en fixant des objectifs plus exigeants"],
-    ["planifier les révisions sur plusieurs séances courtes", "s’entraîner à refaire seul les exercices corrigés", "prendre des notes plus structurées et les relire régulièrement", "consolider les notions hésitantes avant chaque évaluation"],
+    ["planifier les révisions sur plusieurs séances courtes", "s’entraîner à refaire les exercices corrigés en autonomie", "prendre des notes plus structurées et les relire régulièrement", "consolider les notions hésitantes avant chaque évaluation"],
     ["reprendre une notion fondamentale à la fois", "s’appuyer sur les corrections pour refaire les premiers exercices", "préparer un calendrier simple de révisions et s’y tenir", "demander de l’aide pour cerner précisément les difficultés"]
   ],
   Comportement: [
@@ -178,11 +178,14 @@ function editorialPhrases(index) {
   const level = index < 3 ? 0 : index < 5 ? 1 : 2;
   const [first, second, third, fourth] = nextSteps[category][level];
   const capitalized = observation[0].toLocaleUpperCase("fr") + observation.slice(1);
+  const elide = (word, text) => /^[aeiouyàâäéèêëîïôöùûüœ]/iu.test(text)
+    ? word.slice(0, -1) + "’" + text
+    : word + " " + text;
   return [
-    `Il a été constaté que ${observation}. Il convient de ${first} afin de poursuivre la progression.`,
+    `Il a été constaté ${elide("que", observation)}. Il convient ${elide("de", first)} afin de poursuivre la progression.`,
     `Au fil de la période, ${observation}. Pour progresser, {il pourra|elle pourra} ${second}.`,
-    `${capitalized}. Pour la suite, il sera nécessaire de ${third}.`,
-    `Le bilan montre que ${observation}. Pour la suite, {il devra rester engagé|elle devra rester engagée} dans les apprentissages et ${fourth}.`
+    `${capitalized}. Pour la suite, il sera nécessaire ${elide("de", third)}.`,
+    `Le bilan montre ${elide("que", observation)}. Pour la suite, {il devra rester engagé|elle devra rester engagée} dans les apprentissages et ${fourth}.`
   ];
 }
 
