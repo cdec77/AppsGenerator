@@ -2,6 +2,7 @@
 
 const categories = [
   ["Resultats", "Résultats"], ["Travail", "Travail"], ["Participation", "Participation"],
+  ["Méthode et organisation", "Méthode et organisation"], ["Travail de groupe", "Travail de groupe"],
   ["Conseils", "Conseils"], ["Comportement", "Comportement"], ["Bilan Complet", "Bilan complet"]
 ];
 const profiles = [
@@ -310,6 +311,106 @@ const observations = {
       "a fourni un travail très irrégulier",
       "a rarement atteint les objectifs de la période"
     ]
+  ],
+  "Méthode et organisation": [
+    [
+      "a planifié son travail avec une autonomie remarquable",
+      "a su anticiper les échéances sans perdre en rigueur",
+      "a organisé ses révisions de façon très efficace",
+      "a utilisé ses notes avec méthode et précision"
+    ],
+    [
+      "a préparé ses activités avec beaucoup de soin",
+      "a tenu son cahier de textes avec régularité",
+      "a bien réparti ses révisions",
+      "a enchaîné les étapes du travail avec méthode"
+    ],
+    [
+      "a organisé son matériel avec sérieux",
+      "a suivi une méthode de travail efficace",
+      "a généralement anticipé les devoirs à rendre",
+      "a pris des notes claires et utiles"
+    ],
+    [
+      "a préparé l’essentiel du matériel",
+      "a suivi les étapes principales du travail",
+      "a tenu un cahier de textes globalement à jour",
+      "a organisé ses révisions de manière convenable"
+    ],
+    [
+      "a parfois commencé le travail trop tard",
+      "a manqué de régularité dans la préparation",
+      "a noté les devoirs de façon inégale",
+      "a parfois eu du mal à fixer ses priorités"
+    ],
+    [
+      "a peiné à organiser ses révisions",
+      "a laissé plusieurs tâches sans planification",
+      "a utilisé ses notes de façon irrégulière",
+      "a eu besoin de rappels pour préparer le matériel"
+    ],
+    [
+      "a souvent oublié de noter les échéances",
+      "a peiné à suivre les étapes du travail",
+      "a préparé ses révisions de manière très irrégulière",
+      "a rarement retrouvé les documents utiles en classe"
+    ],
+    [
+      "a rencontré de grandes difficultés pour s’organiser",
+      "a rarement préparé le matériel demandé",
+      "a laissé la plupart des échéances sans suivi",
+      "a eu besoin d’un accompagnement régulier pour planifier les tâches"
+    ]
+  ],
+  "Travail de groupe": [
+    [
+      "a coordonné les tâches avec tact",
+      "a favorisé la coopération dans le groupe",
+      "a soutenu ses partenaires avec efficacité",
+      "a guidé la mise en commun avec justesse"
+    ],
+    [
+      "a bien réparti les responsabilités avec le groupe",
+      "a aidé ses partenaires à avancer",
+      "a pris des initiatives utiles au projet collectif",
+      "a facilité les échanges lors du travail en équipe"
+    ],
+    [
+      "a assumé sa part dans le groupe",
+      "a écouté les propositions des partenaires",
+      "a collaboré avec sérieux",
+      "a contribué à la mise en commun"
+    ],
+    [
+      "a rempli le rôle attribué dans l’équipe",
+      "a pris part aux échanges en petit groupe",
+      "a apporté une contribution convenable au projet",
+      "a généralement respecté la répartition des tâches"
+    ],
+    [
+      "a participé de façon inégale au travail de groupe",
+      "a parfois attendu que les autres prennent l’initiative",
+      "a peu partagé ses idées avec les partenaires",
+      "a eu besoin de rappels pour tenir son rôle"
+    ],
+    [
+      "a eu du mal à coordonner ses actions avec l’équipe",
+      "a rarement proposé d’aide pendant le travail collectif",
+      "a peu contribué à la production commune",
+      "a peiné à tenir son rôle au sein du groupe"
+    ],
+    [
+      "a laissé plusieurs tâches collectives à ses partenaires",
+      "a rarement écouté les propositions du groupe",
+      "a eu besoin d’être guidé{|e} pour coopérer",
+      "a apporté une contribution très limitée au projet commun"
+    ],
+    [
+      "a rencontré de grandes difficultés à coopérer",
+      "a rarement pris en charge le rôle confié",
+      "a peu contribué aux décisions collectives",
+      "a eu besoin d’un accompagnement rapproché pour travailler en équipe"
+    ]
   ]
 };
 const byId = id => document.getElementById(id);
@@ -382,6 +483,46 @@ const nextSteps = {
     ["poursuivre les efforts tout en approfondissant les raisonnements", "continuer à s’investir avec la même régularité dans le travail et les échanges", "se fixer des objectifs plus exigeants en conservant une méthode rigoureuse", "consolider les acquis et les mobiliser dans des situations plus complexes"],
     ["travailler plus régulièrement et mieux exploiter les corrections", "consolider les acquis encore fragiles par un entraînement ciblé", "s’organiser avec davantage de constance et participer plus volontiers", "renforcer la méthode et justifier les raisonnements avec plus de précision"],
     ["reprendre les bases et planifier un travail court mais régulier", "s’appuyer sur des objectifs accessibles et des corrections reprises pas à pas", "se responsabiliser en terminant les tâches essentielles et en demandant de l’aide", "redoubler d’efforts pour consolider les apprentissages et s’impliquer en classe"]
+  ],
+  "Méthode et organisation": [
+    [
+      "anticiper les étapes des travaux de longue durée",
+      "affiner les méthodes de prise de notes",
+      "poursuivre la planification des révisions",
+      "comparer l’efficacité de plusieurs façons de s’organiser"
+    ],
+    [
+      "mettre à jour le cahier de textes après chaque cours",
+      "répartir les devoirs sur la semaine",
+      "relire la consigne avant de préparer le matériel",
+      "dresser une liste des tâches à traiter en priorité"
+    ],
+    [
+      "préparer le cartable à partir de l’emploi du temps",
+      "noter une échéance dès qu’elle est annoncée",
+      "diviser le travail en étapes courtes",
+      "vérifier chaque soir les tâches du lendemain"
+    ]
+  ],
+  "Travail de groupe": [
+    [
+      "continuer à solliciter les avis des partenaires",
+      "aider à établir une répartition équitable des rôles",
+      "soutenir la mise en commun des idées",
+      "faciliter une présentation partagée du projet"
+    ],
+    [
+      "prendre une responsabilité précise dès le début de l’activité",
+      "écouter les propositions avant de choisir une solution",
+      "partager une idée lors de la mise en commun",
+      "prévenir le groupe lorsqu’une difficulté survient"
+    ],
+    [
+      "commencer par une tâche clairement définie",
+      "coopérer d’abord en binôme",
+      "suivre la répartition des rôles établie avec le groupe",
+      "demander un appui pour terminer sa part du travail"
+    ]
   ]
 };
 
@@ -504,6 +645,46 @@ const alternateSteps = {
       "se concentrer sur des objectifs atteignables",
       "chercher un soutien dès les premières difficultés",
       "persévérer en vérifiant les progrès étape par étape"
+    ]
+  ],
+  "Méthode et organisation": [
+    [
+      "comparer l’efficacité de plusieurs façons de s’organiser",
+      "poursuivre la planification des révisions",
+      "affiner les méthodes de prise de notes",
+      "anticiper les étapes des travaux de longue durée"
+    ],
+    [
+      "dresser une liste des tâches à traiter en priorité",
+      "relire la consigne avant de préparer le matériel",
+      "répartir les devoirs sur la semaine",
+      "mettre à jour le cahier de textes après chaque cours"
+    ],
+    [
+      "vérifier chaque soir les tâches du lendemain",
+      "diviser le travail en étapes courtes",
+      "noter une échéance dès qu’elle est annoncée",
+      "préparer le cartable à partir de l’emploi du temps"
+    ]
+  ],
+  "Travail de groupe": [
+    [
+      "faciliter une présentation partagée du projet",
+      "soutenir la mise en commun des idées",
+      "aider à établir une répartition équitable des rôles",
+      "continuer à solliciter les avis des partenaires"
+    ],
+    [
+      "prévenir le groupe lorsqu’une difficulté survient",
+      "partager une idée lors de la mise en commun",
+      "écouter les propositions avant de choisir une solution",
+      "prendre une responsabilité précise dès le début de l’activité"
+    ],
+    [
+      "demander un appui pour terminer sa part du travail",
+      "suivre la répartition des rôles établie avec le groupe",
+      "coopérer d’abord en binôme",
+      "commencer par une tâche clairement définie"
     ]
   ]
 };

@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "appsgenerator:" + self.registration.scope + ":";
-const CACHE = CACHE_PREFIX + "v7";
+const CACHE = CACHE_PREFIX + "v8";
 const SHELL = [
   "./", "./style.css", "./app.js", "./storage.js", "./manifest.webmanifest",
   "./icone.ico", "./Import_csv_modele.csv", "./appreciations.db",

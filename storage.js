@@ -97,27 +97,36 @@ function upgradeCollegeBank(db, SQL, initial) {
   const seed = new SQL.Database(new Uint8Array(initial));
   try {
     const seedVersion = seed.exec("PRAGMA user_version")[0].values[0][0];
-    if (seedVersion < 1 || db.exec("PRAGMA user_version")[0].values[0][0] >= seedVersion) return false;
+    const currentVersion = db.exec("PRAGMA user_version")[0].values[0][0];
+    if (seedVersion < 1 || currentVersion >= seedVersion) return false;
     const rows = seed.exec(
       "SELECT categorie, profil, genre, texte FROM appreciations WHERE source = 'college'"
     )[0].values;
     db.run("BEGIN");
-    db.run("ALTER TABLE appreciations ADD COLUMN source TEXT");
-    db.run("UPDATE appreciations SET source = 'personal' WHERE id > 2000");
-    const existing = new Set(
-      (db.exec("SELECT categorie, profil, genre, texte FROM appreciations")[0]?.values ?? []).map(row => JSON.stringify(row))
+    if (currentVersion === 0) {
+      db.run("ALTER TABLE appreciations ADD COLUMN source TEXT");
+      db.run("UPDATE appreciations SET source = 'personal' WHERE id > 2000");
+    }
+    const existing = new Map(
+      (db.exec("SELECT id, categorie, texte FROM appreciations WHERE source = 'college'")[0]?.values ?? [])
+        .map(([id, category, text]) => [text, { id, category }])
     );
     const insert = db.prepare(
       "INSERT INTO appreciations(categorie, profil, genre, texte, source) VALUES (?, ?, ?, ?, 'college')"
     );
+    const move = db.prepare("UPDATE appreciations SET categorie = ? WHERE id = ?");
     try {
       for (const row of rows) {
-        if (!existing.has(JSON.stringify(row))) insert.run(row);
+        const [category, , , text] = row;
+        const saved = existing.get(text);
+        if (!saved) insert.run(row);
+        else if (saved.category !== category) move.run([category, saved.id]);
       }
     } finally {
       insert.free();
+      move.free();
     }
-    db.run("PRAGMA user_version = 1");
+    db.run("PRAGMA user_version = " + seedVersion);
     db.run("COMMIT");
     return true;
   } finally {
@@ -137,7 +146,7 @@ async function database(action, write = false) {
       let db;
       try {
         db = new SQL.Database(new Uint8Array(request.result ?? initial));
-        const needsMigration = request.result && db.exec("PRAGMA user_version")[0].values[0][0] < 1;
+        const needsMigration = request.result && db.exec("PRAGMA user_version")[0].values[0][0] < 2;
         const upgraded = needsMigration && upgradeCollegeBank(db, SQL, initial);
         result = action(db);
         if (write || upgraded) files.put(db.export(), "appreciations.db");
