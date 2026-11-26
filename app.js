@@ -416,6 +416,18 @@ const observations = {
 const byId = id => document.getElementById(id);
 const form = byId("student-form");
 const nameField = byId("name");
+const averageField = byId("average");
+const averageProfile = byId("average-profile");
+const profileThresholds = [18, 16, 14, 12, 10, 8, 6, 0];
+
+function suggestedProfile(value) {
+  const raw = value.trim();
+  if (!raw) return null;
+  if (!/^\d{1,2}(?:[,.]\d{1,3})?$/u.test(raw)) return undefined;
+  const average = Number(raw.replace(",", "."));
+  if (average > 20) return undefined;
+  return profiles[profileThresholds.findIndex(minimum => average >= minimum)];
+}
 const suggestions = byId("suggestions");
 const customPhrase = byId("custom-phrase");
 const draft = byId("draft");
@@ -451,6 +463,7 @@ function choice(list, label, callback, color) {
     callback();
   });
   list.append(button);
+  return button;
 }
 
 const nextSteps = {
@@ -861,10 +874,16 @@ function chooseCategory(value) {
   byId("choose-category").hidden = true;
   const list = byId("profiles");
   list.replaceChildren();
+  const fromAverage = value === "Resultats" || value === "Bilan Complet" ? student.suggested : null;
+  averageProfile.hidden = !fromAverage;
+  averageProfile.textContent = fromAverage ? "Profil suggéré selon la moyenne : " + fromAverage[1] + "." : "";
+  let suggestedButton;
   for (const [profile, label, color] of profiles) {
-    choice(list, label, () => generate(profile), color);
+    const button = choice(list, label, () => generate(profile), color);
+    if (profile === fromAverage?.[0]) suggestedButton = button;
   }
   status("");
+  suggestedButton?.click();
 }
 
 for (const [value, label] of categories) {
@@ -879,8 +898,14 @@ form.addEventListener("submit", async event => {
     nameField.focus();
     return;
   }
+  const suggested = suggestedProfile(averageField.value);
+  if (suggested === undefined) {
+    averageField.setCustomValidity("Saisissez une moyenne comprise entre 0 et 20, par exemple 14,5.");
+    averageField.reportValidity();
+    return;
+  }
   cancelDictation();
-  student = { name, genre: new FormData(form).get("genre") };
+  student = { name, genre: new FormData(form).get("genre"), suggested };
   byId("student").textContent = "Appréciation de " + name;
   byId("home").hidden = true;
   byId("editor").hidden = false;
@@ -895,12 +920,17 @@ form.addEventListener("submit", async event => {
   }
 });
 
+averageField.addEventListener("input", () => averageField.setCustomValidity(""));
+
 byId("reset").addEventListener("click", () => {
   student = null;
   category = "";
   batches.clear();
   seenProposals.clear();
   form.reset();
+  averageField.setCustomValidity("");
+  averageProfile.hidden = true;
+  averageProfile.textContent = "";
   principalForm.reset();
   principalDraft.value = "";
   byId("copy-principal").disabled = true;

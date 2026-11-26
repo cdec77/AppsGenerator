@@ -63,7 +63,7 @@ h1 span { color: #ffcd68; }
 form, .writing { display: grid; gap: .7rem; }
 form h2 { margin-bottom: .1rem !important; }
 label, legend { font-weight: 700; }
-#name, textarea {
+#name, #average, textarea {
   width: 100%; border: 1px solid #bfb2dc; border-radius: 9px;
   padding: .72rem .85rem; background: #fbf9ff;
 }
@@ -152,7 +152,7 @@ h1 span { color: #62ffe2; }
 .radios label, .choices button, .quiet { background: #35234f; }
 button[aria-pressed="true"].quiet { background: #523875; border-color: #77f9e4; }
 .quiet { border-color: #a177d3; }
-#name, textarea, .suggestions li { background: #170f2a; border-color: #6a4a90; }
+#name, #average, textarea, .suggestions li { background: #170f2a; border-color: #6a4a90; }
 input::placeholder, textarea::placeholder, .voice-info { color: #c8b6df; }
 .primary { color: #132335; background: #66ffe1; box-shadow: 0 0 15px #66ffe148; }
 #profiles button { color: #261939; }

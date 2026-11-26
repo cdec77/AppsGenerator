@@ -45,6 +45,9 @@
             <label><input type="radio" name="genre" value="féminin"> Féminin</label>
           </div>
         </fieldset>
+        <label for="average">Moyenne trimestrielle sur 20 <span class="voice-info">(facultatif)</span></label>
+        <input id="average" type="text" inputmode="decimal" autocomplete="off" maxlength="8" placeholder="Ex. 14,5" aria-describedby="average-note">
+        <p id="average-note" class="voice-info">Elle suggère un profil dans Résultats et Bilan complet.</p>
         <button class="primary" type="submit">Commencer</button>
       </form>
       <section class="card bank" aria-labelledby="bank-title">
@@ -72,6 +75,7 @@
         <section class="card">
           <h3>Profil</h3>
           <p id="choose-category">Choisissez une catégorie.</p>
+          <p id="average-profile" class="voice-info" hidden></p>
           <div id="profiles" class="choices"></div>
         </section>
         <section class="card writing">
