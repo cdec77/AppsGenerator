@@ -12,64 +12,304 @@ const profiles = [
 ];
 const observations = {
   "Resultats": [
-    "les notions ont été assimilées avec une remarquable précision et les résultats obtenus ont confirmé une maîtrise solide des compétences évaluées",
-    "des résultats très réguliers ont été obtenus et les connaissances ont été restituées avec clarté dans les exercices comme dans les évaluations",
-    "les objectifs essentiels ont été atteints et les acquis ont été mobilisés avec une justesse satisfaisante dans la plupart des situations",
-    "les résultats obtenus sont globalement corrects et les notions principales ont été comprises, malgré quelques imprécisions dans les justifications",
-    "des acquis ont été constatés, mais leur mobilisation reste irrégulière dès que les situations demandent davantage d’autonomie",
-    "des progrès ponctuels ont été observés, mais plusieurs notions restent fragiles et les erreurs se répètent dans les exercices d’application",
-    "quelques acquis ont été repérés, mais des lacunes importantes ont été relevées dans la compréhension et la restitution des notions",
-    "les compétences fondamentales ont encore été peu mobilisées et les résultats obtenus montrent qu’une reprise progressive des bases est nécessaire"
+    [
+      "a obtenu des résultats remarquables",
+      "a démontré une maîtrise précise des notions",
+      "a justifié ses démarches avec rigueur",
+      "a dépassé les objectifs attendus"
+    ],
+    [
+      "a obtenu de très bons résultats",
+      "a confirmé la solidité de ses acquis",
+      "a mené des raisonnements précis",
+      "a réussi les exercices avec constance"
+    ],
+    [
+      "a atteint les objectifs essentiels",
+      "a mobilisé ses connaissances avec justesse",
+      "a démontré une bonne compréhension",
+      "a obtenu des résultats satisfaisants"
+    ],
+    [
+      "a obtenu des résultats corrects",
+      "a assimilé les notions principales",
+      "a montré des acquis convenables",
+      "a réussi les tâches courantes"
+    ],
+    [
+      "a obtenu des résultats irréguliers",
+      "a assimilé une partie des notions",
+      "a montré des acquis encore inégaux",
+      "a parfois manqué de précision"
+    ],
+    [
+      "a rencontré des difficultés dans les évaluations",
+      "a mobilisé des acquis encore fragiles",
+      "a commis des erreurs récurrentes",
+      "a progressé sur certains exercices"
+    ],
+    [
+      "a rencontré des difficultés importantes",
+      "a restitué peu de connaissances",
+      "a montré des lacunes dans les notions centrales",
+      "a rarement atteint les objectifs"
+    ],
+    [
+      "a peu mobilisé les compétences fondamentales",
+      "a accumulé des lacunes importantes",
+      "a rarement réussi les exercices de base",
+      "a obtenu des résultats très insuffisants"
+    ]
   ],
   "Travail": [
-    "un travail approfondi, rigoureux et soigné a été fourni avec constance, et les difficultés ont été abordées avec méthode et autonomie",
-    "un travail sérieux et régulier a été fourni, avec un soin apprécié dans la préparation, la rédaction et la vérification des réponses",
-    "les tâches demandées ont été menées à bien avec application et les corrections ont généralement été exploitées pour améliorer la méthode",
-    "l’essentiel du travail a été réalisé et un réel souci de bien faire a été observé, même si la préparation reste parfois inégale",
-    "des efforts ont été fournis, mais le travail manque encore de régularité et plusieurs tâches auraient gagné à être approfondies",
-    "une implication a été observée par moments, mais le manque de méthode a limité la qualité du travail et la précision des réponses",
-    "le travail fourni a été trop irrégulier pour consolider les apprentissages, et plusieurs tâches essentielles ont été rendues incomplètes",
-    "trop peu de tâches ont été menées à terme et les habitudes de préparation, de révision et d’organisation restent à construire"
+    [
+      "a fourni un travail rigoureux",
+      "a su approfondir les tâches",
+      "a travaillé avec constance",
+      "a mené les activités en autonomie"
+    ],
+    [
+      "a travaillé avec sérieux",
+      "a fourni des réponses soignées",
+      "a préparé les activités avec méthode",
+      "a fait preuve d’une implication soutenue"
+    ],
+    [
+      "a fourni un travail régulier",
+      "a exploité les corrections avec application",
+      "a mené les tâches à bien",
+      "a travaillé avec méthode"
+    ],
+    [
+      "a réalisé l’essentiel du travail",
+      "a fourni des efforts appréciables",
+      "a préparé les tâches courantes",
+      "a montré un soin globalement convenable"
+    ],
+    [
+      "a fourni un travail inégal",
+      "a parfois négligé la préparation",
+      "a manqué de constance",
+      "a rendu des réponses trop peu approfondies"
+    ],
+    [
+      "a travaillé de manière irrégulière",
+      "a manqué de méthode",
+      "a fourni des efforts ponctuels",
+      "a présenté un travail parfois brouillon"
+    ],
+    [
+      "a rendu plusieurs tâches incomplètes",
+      "a trop peu exploité les corrections",
+      "a manqué de régularité dans les révisions",
+      "a fourni un travail très fragile"
+    ],
+    [
+      "a rarement terminé les tâches essentielles",
+      "a peu préparé les activités",
+      "a trop souvent négligé les corrections",
+      "a fourni un travail très insuffisant"
+    ]
   ],
   "Participation": [
-    "des interventions pertinentes ont été appréciées et les échanges ont été enrichis par une écoute attentive et une argumentation précise",
-    "une participation active a été remarquée et les prises de parole ont régulièrement contribué à faire progresser les échanges",
-    "des interventions adaptées ont été entendues et les échanges ont été suivis avec attention, même lorsque la parole a été moins fréquente",
-    "la participation a été convenable quand la parole a été sollicitée, avec des réponses généralement claires et en lien avec les activités",
-    "quelques interventions pertinentes ont été observées, mais la participation est demeurée trop discrète pour rendre la réflexion pleinement visible",
-    "de courtes prises de parole ont été relevées, mais l’implication est restée irrégulière et les réponses ont souvent manqué de développement",
-    "peu d’interventions spontanées ont été entendues et les occasions de poser une question ou de proposer un raisonnement ont rarement été saisies",
-    "les occasions de participer ont été peu investies et un accompagnement est nécessaire pour prendre progressivement confiance à l’oral"
+    [
+      "a enrichi les échanges",
+      "a argumenté avec pertinence",
+      "a écouté les autres avec attention",
+      "a participé activement aux activités"
+    ],
+    [
+      "a contribué régulièrement aux discussions",
+      "a posé des questions précises",
+      "a formulé des réponses pertinentes",
+      "a su expliquer ses démarches"
+    ],
+    [
+      "a participé avec sérieux",
+      "a écouté les échanges attentivement",
+      "a proposé des réponses adaptées",
+      "a contribué de façon constructive"
+    ],
+    [
+      "a participé quand la parole lui a été donnée",
+      "a suivi les échanges",
+      "a apporté des réponses généralement claires",
+      "a pris part aux activités demandées"
+    ],
+    [
+      "a pris la parole de manière ponctuelle",
+      "a fait preuve de réserve",
+      "a répondu surtout après sollicitation",
+      "a parfois manqué d’aisance à l’oral"
+    ],
+    [
+      "a peu développé ses interventions",
+      "a rarement pris l’initiative de répondre",
+      "a participé de façon irrégulière",
+      "a éprouvé des difficultés à s’exprimer"
+    ],
+    [
+      "a rarement pris la parole",
+      "a peu argumenté ses réponses",
+      "a saisi peu d’occasions de participer",
+      "a montré une participation très limitée"
+    ],
+    [
+      "a très peu pris part aux échanges",
+      "a rarement formulé une réponse",
+      "a peu sollicité d’aide à l’oral",
+      "a éprouvé de grandes difficultés à intervenir"
+    ]
   ],
   "Conseils": [
-    "les démarches les plus exigeantes ont été abordées avec assurance et les méthodes employées se sont révélées efficaces dans des situations variées",
-    "des méthodes de travail efficaces ont été mises en place et leur régularité a permis de confirmer la qualité des acquis",
-    "des habitudes utiles ont été acquises et les corrections ont généralement été comprises, ce qui donne de bons repères pour la suite",
-    "des méthodes adaptées ont été utilisées dans les tâches courantes, mais la relecture et la préparation pourraient être rendues plus systématiques",
-    "des efforts de révision ont été constatés, mais le travail a parfois été entrepris trop tard pour permettre une assimilation durable",
-    "plusieurs erreurs ont été corrigées avec aide, mais elles ont parfois été reproduites faute d’entraînement et de relecture régulière",
-    "des difficultés récurrentes ont été relevées dans l’organisation des révisions et l’utilisation des corrections pour progresser",
-    "les méthodes de base ont été peu mises en pratique et il paraît nécessaire de reconstruire des habitudes de travail accessibles et régulières"
+    [
+      "a développé des méthodes efficaces",
+      "a su examiner plusieurs démarches",
+      "a assimilé les corrections avec précision",
+      "a acquis une solide autonomie"
+    ],
+    [
+      "a adopté des habitudes régulières",
+      "a exploité les corrections avec méthode",
+      "a préparé les évaluations avec sérieux",
+      "a gagné en efficacité"
+    ],
+    [
+      "a acquis des méthodes utiles",
+      "a corrigé la plupart de ses erreurs",
+      "a suivi les étapes avec application",
+      "a montré une organisation satisfaisante"
+    ],
+    [
+      "a utilisé des méthodes convenables",
+      "a mis en œuvre les conseils les plus accessibles",
+      "a commencé à structurer ses révisions",
+      "a exploité une partie des corrections"
+    ],
+    [
+      "a entrepris ses révisions de façon irrégulière",
+      "a parfois commencé la préparation trop tard",
+      "a peu vérifié ses réponses",
+      "a manqué de méthode dans la relecture"
+    ],
+    [
+      "a parfois reproduit des erreurs déjà corrigées",
+      "a manqué d’entraînement",
+      "a peiné à organiser ses révisions",
+      "a eu besoin d’aide pour analyser ses erreurs"
+    ],
+    [
+      "a peu exploité les corrections",
+      "a rencontré des difficultés récurrentes de méthode",
+      "a peiné à structurer les étapes du travail",
+      "a rarement révisé de façon régulière"
+    ],
+    [
+      "a peu mis en pratique les méthodes de base",
+      "a rencontré de grandes difficultés à s’organiser",
+      "a rarement repris les exercices corrigés",
+      "a trop peu préparé les évaluations"
+    ]
   ],
   "Comportement": [
-    "une attitude exemplaire a été appréciée, et le respect des règles comme la qualité de l’écoute ont favorisé le travail collectif",
-    "un comportement respectueux et coopératif a été remarqué, et les activités collectives ont été abordées avec beaucoup de sérieux",
-    "les règles de vie ont été respectées et une attitude calme et constructive a été observée dans la plupart des activités",
-    "le cadre de la classe a été globalement respecté, malgré quelques moments où l’attention aurait pu être mieux maintenue",
-    "les consignes ont généralement été suivies, mais plusieurs rappels ont été nécessaires pour maintenir une écoute régulière",
-    "des efforts de concentration ont été observés, mais les distractions ont parfois gêné le déroulement du travail individuel ou collectif",
-    "des rappels répétés ont été nécessaires pour retrouver le calme, respecter les consignes et préserver l’attention du groupe",
-    "le déroulement des activités a été perturbé à plusieurs reprises, ce qui appelle des efforts soutenus pour retrouver un cadre propice au travail"
+    [
+      "a fait preuve d’une attitude exemplaire",
+      "a favorisé un climat de travail serein",
+      "a coopéré avec tact",
+      "a respecté les règles avec constance"
+    ],
+    [
+      "a adopté une attitude constructive",
+      "a écouté les consignes avec attention",
+      "a coopéré avec sérieux",
+      "a contribué au calme du groupe"
+    ],
+    [
+      "a respecté le cadre de la classe",
+      "a fait preuve d’une attitude posée",
+      "a écouté les consignes",
+      "a participé aux activités avec respect"
+    ],
+    [
+      "a globalement respecté le cadre",
+      "a suivi l’essentiel des consignes",
+      "a retrouvé son calme après les rappels",
+      "a adopté une attitude convenable"
+    ],
+    [
+      "a parfois manqué d’attention",
+      "a eu besoin de rappels ponctuels",
+      "a parfois interrompu les échanges",
+      "a eu du mal à rester concentré{|e}"
+    ],
+    [
+      "a parfois gêné le déroulement des activités",
+      "a éprouvé des difficultés à se concentrer",
+      "a dû être rappelé{|e} aux consignes",
+      "a eu tendance à se disperser"
+    ],
+    [
+      "a eu besoin de rappels répétés",
+      "a fréquemment perdu sa concentration",
+      "a parfois perturbé le travail collectif",
+      "a eu des difficultés à respecter les tours de parole"
+    ],
+    [
+      "a perturbé plusieurs activités",
+      "a peiné à respecter les règles communes",
+      "a eu des difficultés à retrouver le calme",
+      "a rarement maintenu une écoute attentive"
+    ]
   ],
   "Bilan Complet": [
-    "des résultats remarquables ont été obtenus grâce à un travail constant, et la pertinence des interventions a enrichi les apprentissages du groupe",
-    "des acquis solides ont été confirmés, soutenus par un travail régulier, une participation constructive et une attitude appréciée en classe",
-    "les objectifs de la période ont été globalement atteints grâce à des efforts réguliers, et l’implication dans les activités a été satisfaisante",
-    "le bilan est correct dans l’ensemble, avec des acquis utiles et un travail généralement sérieux, malgré une implication encore variable selon les activités",
-    "des progrès ont été observés, mais le bilan demeure inégal en raison d’un travail irrégulier et d’acquis qui demandent à être consolidés",
-    "des efforts ont été relevés dans certaines activités, mais les difficultés persistent dans les résultats, la méthode et la régularité du travail",
-    "quelques points d’appui ont été repérés, mais les acquis restent très fragiles et l’investissement demeure trop irrégulier pour les consolider",
-    "les difficultés se sont accumulées au cours de la période, et les résultats comme le travail fourni montrent qu’une reprise progressive est nécessaire"
+    [
+      "a obtenu d’excellents résultats",
+      "a fourni des efforts constants",
+      "a démontré une remarquable autonomie",
+      "a enrichi les activités du groupe"
+    ],
+    [
+      "a confirmé des acquis solides",
+      "a travaillé avec régularité",
+      "a fait preuve d’une implication constructive",
+      "a progressé avec assurance"
+    ],
+    [
+      "a globalement atteint les objectifs",
+      "a fourni un travail sérieux",
+      "a consolidé des compétences essentielles",
+      "a participé à la dynamique du groupe"
+    ],
+    [
+      "a acquis des repères utiles",
+      "a fourni un travail convenable",
+      "a montré une implication variable",
+      "a obtenu des résultats corrects"
+    ],
+    [
+      "a réalisé des progrès ponctuels",
+      "a présenté des acquis inégaux",
+      "a manqué de régularité dans ses efforts",
+      "a rencontré des difficultés dans certaines activités"
+    ],
+    [
+      "a fourni des efforts dans certaines activités",
+      "a rencontré des difficultés de méthode",
+      "a obtenu des résultats fragiles",
+      "a montré une implication irrégulière"
+    ],
+    [
+      "a trouvé quelques points d’appui",
+      "a montré des acquis très fragiles",
+      "a trop peu investi les activités",
+      "a rencontré des difficultés persistantes"
+    ],
+    [
+      "a rencontré des difficultés dans plusieurs domaines",
+      "a peu mobilisé les bases essentielles",
+      "a fourni un travail très irrégulier",
+      "a rarement atteint les objectifs de la période"
+    ]
   ]
 };
 const byId = id => document.getElementById(id);
@@ -83,6 +323,8 @@ let bank = null;
 let student = null;
 let category = "";
 let offered = [];
+let selectedProfile = "";
+const batches = new Map();
 
 function status(message, error = false) {
   byId("status").textContent = message;
@@ -142,6 +384,129 @@ const nextSteps = {
   ]
 };
 
+const alternateSteps = {
+  "Resultats": [
+    [
+      "vérifier la cohérence des conclusions",
+      "s’exercer à comparer plusieurs solutions",
+      "expliquer le raisonnement à partir d’exemples",
+      "approfondir les exercices de synthèse"
+    ],
+    [
+      "mémoriser les définitions essentielles",
+      "s’entraîner à identifier les données utiles",
+      "revoir les points mal compris",
+      "répondre avec des justifications plus précises"
+    ],
+    [
+      "s’appuyer sur des exemples simples",
+      "s’exercer à restituer une règle à la fois",
+      "reprendre les erreurs avec une aide ciblée",
+      "chercher à comprendre chaque consigne"
+    ]
+  ],
+  "Travail": [
+    [
+      "se fixer des objectifs plus ambitieux",
+      "anticiper les échéances du travail personnel",
+      "chercher des méthodes plus efficaces",
+      "enrichir les réponses par des exemples"
+    ],
+    [
+      "répartir les tâches sur plusieurs jours",
+      "s’appliquer à rendre un travail plus précis",
+      "préparer une liste des points à vérifier",
+      "poursuivre le travail après une première correction"
+    ],
+    [
+      "préparer le matériel en amont",
+      "terminer une tâche avant d’en commencer une autre",
+      "s’investir dans des exercices courts et réguliers",
+      "solliciter un soutien pour structurer le travail"
+    ]
+  ],
+  "Participation": [
+    [
+      "reformuler les arguments entendus",
+      "s’exprimer en confrontant plusieurs points de vue",
+      "poser des questions qui approfondissent les échanges",
+      "collaborer à la mise en commun des démarches"
+    ],
+    [
+      "s’entraîner à parler à partir de notes courtes",
+      "répondre plus spontanément lors des échanges",
+      "lever la main lorsqu’une réponse est prête",
+      "prendre le temps de justifier une intervention"
+    ],
+    [
+      "s’exercer d’abord en binôme",
+      "préparer une réponse simple avant la mise en commun",
+      "chercher à poser une question par séance",
+      "écouter une réponse et essayer de la reformuler"
+    ]
+  ],
+  "Conseils": [
+    [
+      "réviser les points les plus complexes",
+      "justifier les choix à l’aide d’exemples",
+      "s’entraîner à mobiliser les notions sans les notes",
+      "approfondir la comparaison entre plusieurs méthodes"
+    ],
+    [
+      "privilégier des révisions brèves et fréquentes",
+      "anticiper les évaluations avec un calendrier",
+      "noter les erreurs récurrentes pour mieux les corriger",
+      "s’entraîner à restituer les notions sans aide"
+    ],
+    [
+      "établir un ordre de priorité pour les révisions",
+      "s’exercer à refaire une tâche corrigée",
+      "mémoriser les notions essentielles par étapes",
+      "revenir sur les consignes avec un soutien adapté"
+    ]
+  ],
+  "Comportement": [
+    [
+      "coopérer avec la même attention",
+      "poursuivre les efforts de maîtrise de soi",
+      "soutenir le travail du groupe avec discrétion",
+      "veiller à maintenir la qualité de l’écoute"
+    ],
+    [
+      "se concentrer sur une tâche à la fois",
+      "s’exercer à attendre son tour de parole",
+      "préparer le matériel avant le début de l’activité",
+      "chercher à limiter les sources de distraction"
+    ],
+    [
+      "se calmer avant de reprendre une activité",
+      "demander de l’aide pour rester concentré{|e}",
+      "s’engager à suivre une consigne à la fois",
+      "s’efforcer d’écouter sans interrompre"
+    ]
+  ],
+  "Bilan Complet": [
+    [
+      "se fixer un objectif d’approfondissement",
+      "consolider l’autonomie dans les différentes disciplines",
+      "poursuivre l’investissement dans les activités collectives",
+      "développer la précision des raisonnements"
+    ],
+    [
+      "planifier le travail et mieux répartir les révisions",
+      "approfondir les notions encore mal maîtrisées",
+      "consolider les méthodes de travail personnel",
+      "s’impliquer plus régulièrement dans les échanges"
+    ],
+    [
+      "reprendre les apprentissages essentiels avec méthode",
+      "se concentrer sur des objectifs atteignables",
+      "chercher un soutien dès les premières difficultés",
+      "persévérer en vérifiant les progrès étape par étape"
+    ]
+  ]
+};
+
 const directAddress = /(?<![\p{L}\p{M}])(?:tu|te|toi|ton|ta|tes|vous|votre|vos|l[’']élève)(?![\p{L}\p{M}])|(?:^|[.!?]\s+)(?:continue|poursuis|poursuivez|travaille|travaillez|révise|révisez|fais|faites|reste|restez|essaie|essayez)\b/iu;
 
 function namePattern() {
@@ -149,9 +514,9 @@ function namePattern() {
   return `(?<![\\p{L}\\p{M}])${escaped}(?![\\p{L}\\p{M}])`;
 }
 
-function withStudent(phrase, template = false) {
+function withStudent(phrase) {
   const feminine = student.genre === "féminin";
-  const filled = phrase.replace(/\{([^{}|]+)\|([^{}|]+)\}/g, (_, masculine, female) => feminine ? female : masculine);
+  const filled = phrase.replace(/\{([^{}|]*)\|([^{}|]*)\}/g, (_, masculine, female) => feminine ? female : masculine);
   const references = new RegExp(`(?:[dD][’']|\\bde\\s+)?(?:\\{prenom\\}|${namePattern()})`, "giu");
   const first = !draft.value.trim();
   let named = false;
@@ -169,24 +534,46 @@ function withStudent(phrase, template = false) {
     if (atStart) return feminine ? "Elle" : "Il";
     return feminine ? "elle" : "il";
   });
-  if (template && first && !named) return `Pour ${student.name}, ${rendered[0].toLocaleLowerCase("fr")}${rendered.slice(1)}`;
   return rendered;
 }
 
-function editorialPhrases(index) {
-  const observation = observations[category][index];
+function editorialPhrases(index, batch) {
+  const facts = observations[category][index];
   const level = index < 3 ? 0 : index < 5 ? 1 : 2;
-  const [first, second, third, fourth] = nextSteps[category][level];
-  const capitalized = observation[0].toLocaleUpperCase("fr") + observation.slice(1);
-  const elide = (word, text) => /^[aeiouyàâäéèêëîïôöùûüœ]/iu.test(text)
-    ? word.slice(0, -1) + "’" + text
-    : word + " " + text;
-  return [
-    `Il a été constaté ${elide("que", observation)}. Il convient ${elide("de", first)} afin de poursuivre la progression.`,
-    `Au fil de la période, ${observation}. Pour progresser, {il pourra|elle pourra} ${second}.`,
-    `${capitalized}. Pour la suite, il sera nécessaire ${elide("de", third)}.`,
-    `Le bilan montre ${elide("que", observation)}. Pour la suite, {il devra rester engagé|elle devra rester engagée} dans les apprentissages et ${fourth}.`
-  ];
+  const steps = batch % 2 ? alternateSteps[category][level] : nextSteps[category][level];
+  const openings = ["Il convient", "Il sera utile", "Il est recommandé", "Il importe"];
+  return facts.map((fact, number) => {
+    const step = steps[(number + Math.floor(batch / 2)) % steps.length];
+    const opening = openings[(number + Math.floor(batch / 8)) % openings.length];
+    const link = /^[aeiouyàâäéèêëîïôöùûüœ]/iu.test(step) ? "d’" : "de ";
+    if (batch % 2) {
+      const modal = (number + Math.floor(batch / 2)) % 2 ? "devra" : "pourra";
+      const observed = facts[(number + 1) % facts.length];
+      return `{prenom} ${modal} ${step}. {Il|Elle} ${observed}.`;
+    }
+    return `{prenom} ${fact}. ${opening} ${link}${step}.`;
+  });
+}
+
+function sentenceList(text) {
+  return text.trim().match(/[^.!?…]+(?:[.!?…]+|$)/gu)?.map(sentence => sentence.trim()) ?? [];
+}
+
+function sentenceKey(sentence) {
+  const subject = new RegExp(`^(?:${namePattern()}|il|elle)\\s+`, "iu");
+  return sentence.replace(subject, "")
+    .replace(/^(?:(?:devra|pourra) |(?:convient|sera utile|est recommandé|importe) d(?:e |’))/iu, "")
+    .replace(/[.!?…]+$/u, "").trim().toLocaleLowerCase("fr");
+}
+
+function unusedSentences(phrase) {
+  const existing = new Set(sentenceList(draft.value).map(sentenceKey));
+  return sentenceList(withStudent(phrase)).filter(sentence => {
+    const key = sentenceKey(sentence);
+    if (existing.has(key)) return false;
+    existing.add(key);
+    return true;
+  }).join(" ");
 }
 
 function renderSuggestions() {
@@ -195,40 +582,60 @@ function renderSuggestions() {
     const item = document.createElement("li");
     const text = document.createElement("p");
     const add = document.createElement("button");
-    text.textContent = withStudent(phrase, true);
+    const available = unusedSentences(phrase);
+    text.textContent = available || withStudent(phrase);
+    add.disabled = !available;
     add.type = "button";
     add.className = "quiet";
     add.textContent = "Ajouter";
     add.setAttribute("aria-label", "Ajouter la proposition " + (index + 1));
-    add.addEventListener("click", () => appendPhrase(withStudent(phrase, true), index));
+    add.addEventListener("click", () => appendPhrase(unusedSentences(phrase), index));
     item.append(text, add);
     suggestions.append(item);
   });
 }
 
 function appendPhrase(phrase, index) {
-  draft.value = [draft.value.trim(), phrase].filter(Boolean).join(" ");
+  if (!phrase) {
+    status("Cette formulation figure déjà dans l’appréciation.");
+    return;
+  }
+  const text = draft.value.trim();
+  const separator = text && !/[.!?…]$/u.test(text) ? ". " : " ";
+  draft.value = text ? text + separator + phrase : phrase;
   byId("copy").disabled = false;
   renderSuggestions();
   if (index !== undefined) suggestions.children[index].querySelector("button").focus();
   status("Phrase ajoutée à l’appréciation.");
 }
 
-function generate(profile) {
+function generate(profile, refresh = false) {
+  selectedProfile = profile;
   const profileIndex = profiles.findIndex(([value]) => value === profile);
+  const key = category + "/" + profile;
+  const batch = refresh ? (batches.get(key) ?? 0) + 1 : (batches.get(key) ?? 0);
+  batches.set(key, batch);
+  offered = editorialPhrases(profileIndex, batch);
   const custom = [...new Set(bank?.[category]?.[profile]?.[student.genre] ?? [])].filter(phrase =>
-    phrase.trim().split(/\s+/u).length >= 24 && !directAddress.test(phrase) &&
-    /\b(?:devoir|doit|devra|pouvoir|peut|pourra|savoir|sait|faudra|convient)\b/iu.test(phrase)
+    /^\{prenom\} /u.test(phrase) && !directAddress.test(phrase) && sentenceList(phrase).length === 1 &&
+    phrase.trim().split(/\s+/u).length <= 16
   );
-  offered = editorialPhrases(profileIndex);
-  if (custom.length) offered[3] = custom[Math.floor(Math.random() * custom.length)];
+  if (custom.length && batch % 4 === 0) {
+    const [, step] = sentenceList(offered[3]);
+    offered[3] = custom[Math.floor(batch / 4) % custom.length].replace(/[.!?…]*$/u, ".") + " " + step;
+  }
   renderSuggestions();
   byId("suggestion-hint").hidden = true;
-  status("");
+  byId("refresh-suggestions").hidden = false;
+  status(refresh ? "Quatre nouvelles propositions sont disponibles." : "");
 }
+
+byId("refresh-suggestions").addEventListener("click", () => generate(selectedProfile, true));
 
 function clearSuggestions() {
   offered = [];
+  selectedProfile = "";
+  byId("refresh-suggestions").hidden = true;
   renderSuggestions();
   byId("suggestion-hint").hidden = false;
   byId("suggestion-hint").textContent = "Choisissez un profil pour voir les propositions.";
@@ -277,6 +684,7 @@ form.addEventListener("submit", async event => {
 byId("reset").addEventListener("click", () => {
   student = null;
   category = "";
+  batches.clear();
   form.reset();
   principalForm.reset();
   principalDraft.value = "";
@@ -310,7 +718,7 @@ customForm.addEventListener("submit", event => {
     customPhrase.focus();
     return;
   }
-  appendPhrase(withStudent(phrase));
+  appendPhrase(unusedSentences(phrase));
   customPhrase.value = "";
   byId("add-custom").disabled = true;
   customPhrase.focus();
@@ -360,7 +768,7 @@ principalForm.addEventListener("submit", event => {
   event.preventDefault();
   const index = profiles.findIndex(([profile]) => profile === principalProfile.value);
   if (index < 0) return;
-  principalDraft.value = principalSummaries[index].replace(/\{([^{}|]+)\|([^{}|]+)\}/g,
+  principalDraft.value = principalSummaries[index].replace(/\{([^{}|]*)\|([^{}|]*)\}/g,
     (_, masculine, feminine) => student.genre === "féminin" ? feminine : masculine);
   byId("copy-principal").disabled = false;
   principalDraft.focus();
