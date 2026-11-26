@@ -92,6 +92,21 @@
           <button id="copy" class="quiet" type="button" disabled>Copier le texte</button>
         </section>
       </div>
+      <section class="card principal" aria-labelledby="principal-title">
+        <h3 id="principal-title">Synthèse du professeur principal</h3>
+        <form id="principal-form">
+          <label for="principal-profile">Profil du bilan d’ensemble</label>
+          <div class="principal-actions">
+            <select id="principal-profile" required>
+              <option value="">Choisir un profil</option>
+            </select>
+            <button class="primary" type="submit">Générer la synthèse</button>
+          </div>
+        </form>
+        <label for="principal-draft">Phrase de synthèse</label>
+        <textarea id="principal-draft" rows="3" placeholder="Le texte généré peut être modifié ici."></textarea>
+        <button id="copy-principal" class="quiet" type="button" disabled>Copier la synthèse</button>
+      </section>
     </section>
     <p id="status" role="status" aria-live="polite"></p>
   </main>

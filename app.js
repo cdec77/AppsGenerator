@@ -275,6 +275,9 @@ byId("reset").addEventListener("click", () => {
   student = null;
   category = "";
   form.reset();
+  principalForm.reset();
+  principalDraft.value = "";
+  byId("copy-principal").disabled = true;
   cancelDictation();
   clearSuggestions();
   customPhrase.value = "";
@@ -314,16 +317,57 @@ draft.addEventListener("input", () => {
   byId("copy").disabled = !draft.value.trim();
   renderSuggestions();
 });
-byId("copy").addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText(draft.value);
-    status("Appréciation copiée.");
-  } catch {
-    draft.focus();
-    draft.select();
-    status("Texte sélectionné. Utilisez la commande de copie de votre appareil.");
-  }
+function bindCopy(button, field, message) {
+  button.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(field.value);
+      status(message);
+    } catch {
+      field.focus();
+      field.select();
+      status("Texte sélectionné. Utilisez la commande de copie de votre appareil.");
+    }
+  });
+}
+
+bindCopy(byId("copy"), draft, "Appréciation copiée.");
+
+const principalSummaries = [
+  "Un bilan d’ensemble remarquable a été établi grâce à la solidité des acquis, à la constance du travail et à la qualité de l’implication, et {il pourra|elle pourra} poursuivre sur cette lancée en approfondissant encore ses méthodes.",
+  "Un bilan d’ensemble très satisfaisant a été établi à partir de résultats solides et d’efforts réguliers, et {il pourra|elle pourra} s’appuyer sur cette dynamique pour gagner encore en autonomie.",
+  "Le bilan d’ensemble est satisfaisant et des acquis solides ont été constatés, ce qui devrait permettre de poursuivre les progrès en maintenant la régularité du travail et en exploitant davantage les corrections.",
+  "Un bilan d’ensemble convenable a été établi, avec des acquis sur lesquels il est possible de s’appuyer, et {il devra|elle devra} s’organiser avec davantage de constance pour consolider les progrès.",
+  "Des acquis ont été constatés au cours de la période, mais le bilan demeure inégal et il faudra renforcer la régularité du travail pour mieux mobiliser les connaissances dans les différentes disciplines.",
+  "Des efforts ont été relevés, mais le bilan d’ensemble reste fragile et {il devra|elle devra} s’organiser autour d’objectifs précis, reprendre les corrections et demander de l’aide dès que les difficultés persistent.",
+  "Quelques points d’appui ont été repérés, mais des difficultés importantes ont été constatées et il paraît nécessaire de reprendre les acquis essentiels, de planifier un entraînement régulier et de s’appuyer sur l’accompagnement proposé.",
+  "Les difficultés relevées dans le bilan d’ensemble appellent une reprise progressive des bases, et {il devra|elle devra} s’investir dans des tâches courtes et régulières pour retrouver des repères et consolider les premiers acquis."
+];
+
+const principalForm = byId("principal-form");
+const principalProfile = byId("principal-profile");
+const principalDraft = byId("principal-draft");
+for (const [profile, label] of profiles) {
+  const option = document.createElement("option");
+  option.value = profile;
+  option.textContent = label;
+  principalProfile.append(option);
+}
+
+principalForm.addEventListener("submit", event => {
+  event.preventDefault();
+  const index = profiles.findIndex(([profile]) => profile === principalProfile.value);
+  if (index < 0) return;
+  principalDraft.value = principalSummaries[index].replace(/\{([^{}|]+)\|([^{}|]+)\}/g,
+    (_, masculine, feminine) => student.genre === "féminin" ? feminine : masculine);
+  byId("copy-principal").disabled = false;
+  principalDraft.focus();
+  status("Synthèse du professeur principal générée.");
 });
+
+principalDraft.addEventListener("input", () => {
+  byId("copy-principal").disabled = !principalDraft.value.trim();
+});
+bindCopy(byId("copy-principal"), principalDraft, "Synthèse copiée.");
 
 const sqliteFile = byId("sqlite-file");
 const importButton = byId("import");
