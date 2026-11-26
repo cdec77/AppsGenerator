@@ -69,7 +69,7 @@ async function csvRows(file) {
 }
 
 async function dbRows(file) {
-  if (file.size > 20 * 1024 * 1024) throw new Error("Choisissez une base de 20 Mo maximum.");
+  if (file.size > 32 * 1024 * 1024) throw new Error("Choisissez une base de 32 Mo maximum.");
   const SQL = await sqlite;
   const incoming = new SQL.Database(new Uint8Array(await file.arrayBuffer()));
   try {
@@ -146,7 +146,7 @@ async function database(action, write = false) {
       let db;
       try {
         db = new SQL.Database(new Uint8Array(request.result ?? initial));
-        const needsMigration = request.result && db.exec("PRAGMA user_version")[0].values[0][0] < 2;
+        const needsMigration = request.result && db.exec("PRAGMA user_version")[0].values[0][0] < 3;
         const upgraded = needsMigration && upgradeCollegeBank(db, SQL, initial);
         result = action(db);
         if (write || upgraded) files.put(db.export(), "appreciations.db");
